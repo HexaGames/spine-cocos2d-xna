@@ -73,8 +73,8 @@ namespace Spine {
 			skeletonRenderer = new SkeletonMeshRenderer(GraphicsDevice);
 			skeletonRenderer.PremultipliedAlpha = true;
 
-            String name = "spineboy";
-            //String name = "goblins-mesh";
+            //String name = "spineboy";
+            String name = "goblins-mesh";
             bool binaryData = false;
 
             //String name = "raptor";
