@@ -211,3 +211,4 @@ $RECYCLE.BIN/
 .svn/
 logs/
 !*.log
+/spine-monogame/packages
