@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-csharp", "spine-cshar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-monogame", "spine-monogame\spine-monogame.csproj", "{9145CFF2-16F7-4CA3-B298-B0FB357495D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-cocos2d-xna", "spine-cocos2d-xna\spine-cocos2d-xna.csproj", "{11344FBA-55CD-4C96-9D08-603135518B13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-monogame", "test\monogame\test-monogame.csproj", "{BD8484D4-409D-4F43-8ECD-014EC48B75CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{9145CFF2-16F7-4CA3-B298-B0FB357495D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9145CFF2-16F7-4CA3-B298-B0FB357495D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9145CFF2-16F7-4CA3-B298-B0FB357495D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11344FBA-55CD-4C96-9D08-603135518B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11344FBA-55CD-4C96-9D08-603135518B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11344FBA-55CD-4C96-9D08-603135518B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11344FBA-55CD-4C96-9D08-603135518B13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD8484D4-409D-4F43-8ECD-014EC48B75CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD8484D4-409D-4F43-8ECD-014EC48B75CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD8484D4-409D-4F43-8ECD-014EC48B75CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD8484D4-409D-4F43-8ECD-014EC48B75CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
