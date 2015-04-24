@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-csharp", "spine-csharp.csproj", "{690E4AA7-BB09-4663-9908-FD5637AE907A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-csharp", "spine-csharp\spine-csharp.csproj", "{690E4AA7-BB09-4663-9908-FD5637AE907A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-monogame", "spine-monogame.csproj", "{9145CFF2-16F7-4CA3-B298-B0FB357495D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-monogame", "spine-monogame\spine-monogame.csproj", "{9145CFF2-16F7-4CA3-B298-B0FB357495D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{690E4AA7-BB09-4663-9908-FD5637AE907A}</ProjectGuid>
+    <ProjectGuid>{11344FBA-55CD-4C96-9D08-603135518B13}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Spine</RootNamespace>
-    <AssemblyName>spine-csharp</AssemblyName>
+    <AssemblyName>spine-cocos2d-xna</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,39 +31,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="spine-csharp\Animation.cs" />
-    <Compile Include="spine-csharp\AnimationState.cs" />
-    <Compile Include="spine-csharp\AnimationStateData.cs" />
-    <Compile Include="spine-csharp\Atlas.cs" />
-    <Compile Include="spine-csharp\Attachments\AtlasAttachmentLoader.cs" />
-    <Compile Include="spine-csharp\Attachments\Attachment.cs" />
-    <Compile Include="spine-csharp\Attachments\AttachmentLoader.cs" />
-    <Compile Include="spine-csharp\Attachments\AttachmentType.cs" />
-    <Compile Include="spine-csharp\Attachments\BoundingBoxAttachment.cs" />
-    <Compile Include="spine-csharp\Attachments\MeshAttachment.cs" />
-    <Compile Include="spine-csharp\Attachments\RegionAttachment.cs" />
-    <Compile Include="spine-csharp\Attachments\SkinnedMeshAttachment.cs" />
-    <Compile Include="spine-csharp\BlendMode.cs" />
-    <Compile Include="spine-csharp\Bone.cs" />
-    <Compile Include="spine-csharp\BoneData.cs" />
-    <Compile Include="spine-csharp\Event.cs" />
-    <Compile Include="spine-csharp\EventData.cs" />
-    <Compile Include="spine-csharp\IkConstraint.cs" />
-    <Compile Include="spine-csharp\IkConstraintData.cs" />
-    <Compile Include="spine-csharp\Json.cs" />
-    <Compile Include="spine-csharp\Skeleton.cs" />
-    <Compile Include="spine-csharp\SkeletonBinary.cs" />
-    <Compile Include="spine-csharp\SkeletonBounds.cs" />
-    <Compile Include="spine-csharp\SkeletonData.cs" />
-    <Compile Include="spine-csharp\SkeletonJson.cs" />
-    <Compile Include="spine-csharp\Skin.cs" />
-    <Compile Include="spine-csharp\Slot.cs" />
-    <Compile Include="spine-csharp\SlotData.cs" />
+    <Folder Include="spine-cocos2d-xna\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

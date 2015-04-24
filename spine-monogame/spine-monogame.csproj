@@ -32,29 +32,29 @@
   <ItemGroup>
     <Reference Include="MonoGame.Framework, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>packages\Cocos2D-XNA.WindowsGL.1.6.0.0\lib\net40\MonoGame.Framework.dll</HintPath>
+      <HintPath>..\packages\Cocos2D-XNA.WindowsGL.1.6.0.0\lib\net40\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="spine-monogame\MeshBatcher.cs" />
-    <Compile Include="spine-monogame\RegionBatcher.cs" />
-    <Compile Include="spine-monogame\SkeletonMeshRenderer.cs" />
-    <Compile Include="spine-monogame\SkeletonRegionRenderer.cs" />
-    <Compile Include="spine-monogame\Util.cs" />
-    <Compile Include="spine-monogame\XnaTextureLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="spine-csharp.csproj">
-      <Project>{690e4aa7-bb09-4663-9908-fd5637ae907a}</Project>
-      <Name>spine-csharp</Name>
-    </ProjectReference>
+    <Compile Include="MeshBatcher.cs" />
+    <Compile Include="RegionBatcher.cs" />
+    <Compile Include="SkeletonMeshRenderer.cs" />
+    <Compile Include="SkeletonRegionRenderer.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="XnaTextureLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\spine-csharp\spine-csharp.csproj">
+      <Project>{690e4aa7-bb09-4663-9908-fd5637ae907a}</Project>
+      <Name>spine-csharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
