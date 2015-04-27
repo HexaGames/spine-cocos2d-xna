@@ -21,6 +21,14 @@ namespace Spine
         public bool debugBones;
         public bool premultipliedAlpha;
 
+        public override bool IsOpacityModifyRGB
+        {
+            get
+            {
+                return premultipliedAlpha;
+            }
+        }
+
         private void Initialize()
         {
             debugSlots = false;
@@ -121,12 +129,12 @@ namespace Spine
         //    return node;
         //}
 
-        public virtual void Update(float deltaTime)
+        public override void Update(float deltaTime)
         {
             skeleton.Update(deltaTime * timeScale);
         }
 
-        public virtual void Draw()
+        public override void Draw()
         {
             //CC_NODE_DRAW_SETUP();
             //ccGLBindVAO(0);
@@ -263,7 +271,7 @@ namespace Spine
             //}
         }
 
-        public virtual CCRect BoundingBox()
+        public new CCRect BoundingBox()
         {
             float minX = float.MaxValue, minY = float.MaxValue, maxX = float.MinValue, maxY = float.MinValue;
             float scaleX = ScaleX, scaleY = ScaleY;
@@ -370,10 +378,6 @@ namespace Spine
             premultipliedAlpha = value;
         }
 
-        public virtual bool IsOpacityModifyRGB()
-        {
-            return premultipliedAlpha;
-        }
 
         //public CC_PROPERTY(cocos2d::ccBlendFunc, blendFunc, BlendFunc);
         public CCBlendFunc BlendFunc { get; set; }
