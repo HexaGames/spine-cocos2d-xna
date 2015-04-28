@@ -217,18 +217,24 @@ namespace Spine
                         blendMode = (int)slot.Data.BlendMode;
                         switch (slot.Data.BlendMode)
                         {
-                            //UNDONE BlendMode
                             case BlendMode.additive:
                                 //CCGLBlendFunc(premultipliedAlpha ? GL_ONE : GL_SRC_ALPHA, GL_ONE);
+                                if (premultipliedAlpha)
+                                    CCDrawManager.BlendFunc(new CCBlendFunc(CCOGLES.GL_ONE, CCOGLES.GL_ONE));
+                                else
+                                    CCDrawManager.BlendFunc(new CCBlendFunc(CCOGLES.GL_SRC_ALPHA, CCOGLES.GL_ONE));
                                 break;
                             case BlendMode.multiply:
                                 //ccGLBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+                                CCDrawManager.BlendFunc(new CCBlendFunc(CCOGLES.GL_DST_COLOR, CCOGLES.GL_ONE_MINUS_SRC_ALPHA));
                                 break;
                             case BlendMode.screen:
                                 //ccGLBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+                                CCDrawManager.BlendFunc(new CCBlendFunc(CCOGLES.GL_ONE, CCOGLES.GL_ONE_MINUS_SRC_COLOR));
                                 break;
                             default:
                                 //ccGLBlendFunc(blendFunc.src, blendFunc.dst);
+                                CCDrawManager.BlendFunc(BlendFunc);
                                 break;
                         }
                     }

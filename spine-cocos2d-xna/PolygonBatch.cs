@@ -69,6 +69,8 @@ namespace Spine
             if (_verticesCount == 0)
                 return;
 
+            CCDrawManager.BindTexture(_texture);
+
             //ccGLBindTexture2D(texture->getName());
             //glEnableVertexAttribArray(kCCVertexAttrib_Position);
             //glEnableVertexAttribArray(kCCVertexAttrib_Color);
