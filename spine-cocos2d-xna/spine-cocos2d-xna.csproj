@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CCV2F_C4B_T2F.cs" />
     <Compile Include="PolygonBatch.cs" />
     <Compile Include="SkeletonAnimation.cs" />
     <Compile Include="SkeletonRenderer.cs" />
