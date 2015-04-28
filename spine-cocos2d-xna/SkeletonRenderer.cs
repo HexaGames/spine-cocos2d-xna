@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Cocos2D;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,12 +8,12 @@ namespace Spine
     public class SkeletonRenderer : CCNodeRGBA, ICCBlendProtocol
     {
 
-        static int[] quadTriangles = { 0, 1, 2, 2, 3, 0 };
+        private static readonly int[] QuadTriangles = { 0, 1, 2, 2, 3, 0 };
 
-        private bool ownsSkeletonData;
-        private Atlas atlas;
-        private PolygonBatch batch;
-        private float[] worldVertices;
+        private bool _ownsSkeletonData;
+        private Atlas _atlas;
+        private PolygonBatch _batch;
+        private float[] _worldVertices;
 
         public Skeleton skeleton;
         public Bone rootBone;
@@ -35,9 +36,9 @@ namespace Spine
             debugBones = false;
             timeScale = 1;
 
-            worldVertices = new float[1000]; // Max number of vertices per mesh.
+            _worldVertices = new float[1000]; // Max number of vertices per mesh.
 
-            batch = PolygonBatch.CreateWithCapacity(2000); // Max number of vertices and triangles per batch.
+            _batch = PolygonBatch.CreateWithCapacity(2000); // Max number of vertices and triangles per batch.
 
             //blendFunc.src = GL_ONE;
             //blendFunc.dst = GL_ONE_MINUS_SRC_ALPHA;
@@ -73,27 +74,35 @@ namespace Spine
             SetSkeletonData(skeletonData, true);
         }
 
-        //public SkeletonRenderer(string skeletonDataFile, string atlasFile, float scale = 0)
-        //{
-        //    Initialize();
+        public SkeletonRenderer(string skeletonDataFile, string atlasFile, float scale = 0)
+        {
+            Initialize();
 
-        //    atlas = new Atlas(atlasFile, new XnaTextureLoader(GraphicsDevice));
-        //    //CCAssert(atlas, "Error reading atlas file.");
+            using (StreamReader reader = new StreamReader(CCFileUtils.GetFileStream(atlasFile)))
+            {
+                _atlas = new Atlas(reader, Path.GetDirectoryName(atlasFile), new CCTexture2DLoader());
+            }
+            //CCAssert(atlas, "Error reading atlas file.");
 
-        //    SkeletonJson json = new SkeletonJson(atlas);
-        //    json.Scale = scale;
-        //    SkeletonData skeletonData = json.ReadSkeletonData(skeletonDataFile);
-        //    //CCAssert(skeletonData, json->error ? json->error : "Error reading skeleton data.");
-        //    //spSkeletonJson_dispose(json);
+            SkeletonJson json = new SkeletonJson(_atlas);
+            json.Scale = scale;
 
-        //    SetSkeletonData(skeletonData, true);
-        //}
+            using (StreamReader reader = new StreamReader(CCFileUtils.GetFileStream(skeletonDataFile)))
+            {
+                SkeletonData skeletonData = json.ReadSkeletonData(reader);
+                SetSkeletonData(skeletonData, true);
+            }
+
+            //CCAssert(skeletonData, json->error ? json->error : "Error reading skeleton data.");
+            //spSkeletonJson_dispose(json);
+
+        }
 
         protected void SetSkeletonData(SkeletonData skeletonData, bool ownsSkeletonData)
         {
             skeleton = new Skeleton(skeletonData);
             rootBone = skeleton.Bones[0];
-            this.ownsSkeletonData = ownsSkeletonData;
+            this._ownsSkeletonData = ownsSkeletonData;
         }
 
         protected virtual CCTexture2D getTexture(RegionAttachment attachment)
@@ -123,11 +132,11 @@ namespace Spine
             return node;
         }
 
-        //public static SkeletonRenderer CreateWithFile(string skeletonDataFile, string atlasFile, float scale = 0)
-        //{
-        //    SkeletonRenderer node = new SkeletonRenderer(skeletonDataFile, atlasFile, scale);
-        //    return node;
-        //}
+        public static SkeletonRenderer CreateWithFile(string skeletonDataFile, string atlasFile, float scale = 0)
+        {
+            SkeletonRenderer node = new SkeletonRenderer(skeletonDataFile, atlasFile, scale);
+            return node;
+        }
 
         public override void Update(float deltaTime)
         {
@@ -161,11 +170,11 @@ namespace Spine
                 if (slot.Attachment is RegionAttachment)
                 {
                     RegionAttachment attachment = (RegionAttachment)slot.Attachment;
-                    attachment.ComputeWorldVertices(slot.Bone, worldVertices);
+                    attachment.ComputeWorldVertices(slot.Bone, _worldVertices);
                     texture = getTexture(attachment);
                     uvs = attachment.UVs;
                     verticesCount = 8;
-                    triangles = quadTriangles;
+                    triangles = QuadTriangles;
                     trianglesCount = 6;
                     r = attachment.R;
                     g = attachment.G;
@@ -175,7 +184,7 @@ namespace Spine
                 else if (slot.Attachment is MeshAttachment)
                 {
                     MeshAttachment attachment = (MeshAttachment)slot.Attachment;
-                    attachment.ComputeWorldVertices(slot, worldVertices);
+                    attachment.ComputeWorldVertices(slot, _worldVertices);
                     texture = getTexture(attachment);
                     uvs = attachment.UVs;
                     verticesCount = attachment.Vertices.Length;
@@ -189,7 +198,7 @@ namespace Spine
                 else if (slot.Attachment is SkinnedMeshAttachment)
                 {
                     SkinnedMeshAttachment attachment = (SkinnedMeshAttachment)slot.Attachment;
-                    attachment.ComputeWorldVertices(slot, worldVertices);
+                    attachment.ComputeWorldVertices(slot, _worldVertices);
                     texture = getTexture(attachment);
                     uvs = attachment.UVs;
                     verticesCount = attachment.UVs.Length;
@@ -204,7 +213,7 @@ namespace Spine
                 {
                     if ((int)slot.Data.BlendMode != blendMode)
                     {
-                        batch.flush();
+                        _batch.Flush();
                         blendMode = (int)slot.Data.BlendMode;
                         switch (slot.Data.BlendMode)
                         {
@@ -228,10 +237,10 @@ namespace Spine
                     color.R = (byte)(skeleton.R * slot.R * r * multiplier);
                     color.G = (byte)(skeleton.G * slot.G * g * multiplier);
                     color.B = (byte)(skeleton.B * slot.B * b * multiplier);
-                    batch.add(texture, worldVertices, uvs, verticesCount, triangles, trianglesCount, color);
+                    _batch.Add(texture, _worldVertices, uvs, verticesCount, triangles, trianglesCount, color);
                 }
             }
-            batch.flush();
+            _batch.Flush();
 
             //if (debugSlots) {
             //    // Slots.
@@ -285,19 +294,19 @@ namespace Spine
                 if (slot.Attachment is RegionAttachment)
                 {
                     RegionAttachment attachment = (RegionAttachment)slot.Attachment;
-                    attachment.ComputeWorldVertices(slot.Bone, worldVertices);
+                    attachment.ComputeWorldVertices(slot.Bone, _worldVertices);
                     verticesCount = 8;
                 }
                 else if (slot.Attachment is MeshAttachment)
                 {
                     MeshAttachment attachment = (MeshAttachment)slot.Attachment;
-                    attachment.ComputeWorldVertices(slot, worldVertices);
+                    attachment.ComputeWorldVertices(slot, _worldVertices);
                     verticesCount = attachment.Vertices.Length;
                 }
                 else if (slot.Attachment is SkinnedMeshAttachment)
                 {
                     SkinnedMeshAttachment attachment = (SkinnedMeshAttachment)slot.Attachment;
-                    attachment.ComputeWorldVertices(slot, worldVertices);
+                    attachment.ComputeWorldVertices(slot, _worldVertices);
                     verticesCount = attachment.UVs.Length;
                 }
                 else
@@ -305,7 +314,7 @@ namespace Spine
 
                 for (int ii = 0; ii < verticesCount; ii += 2)
                 {
-                    float x = worldVertices[ii] * scaleX, y = worldVertices[ii + 1] * scaleY;
+                    float x = _worldVertices[ii] * scaleX, y = _worldVertices[ii + 1] * scaleY;
                     minX = Math.Min(minX, x);
                     minY = Math.Min(minY, y);
                     maxX = Math.Max(maxX, x);

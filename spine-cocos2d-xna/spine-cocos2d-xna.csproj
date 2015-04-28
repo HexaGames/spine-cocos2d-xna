@@ -70,6 +70,7 @@
     <Compile Include="PolygonBatch.cs" />
     <Compile Include="SkeletonAnimation.cs" />
     <Compile Include="SkeletonRenderer.cs" />
+    <Compile Include="CCTexture2DLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SDL.dll" />

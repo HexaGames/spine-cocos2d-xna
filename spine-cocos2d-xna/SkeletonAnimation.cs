@@ -48,11 +48,11 @@ namespace Spine
             Initialize();
         }
 
-        //public SkeletonAnimation(string skeletonDataFile, string atlasFile, float scale = 0)
-        //    : base(skeletonDataFile, atlasFile, scale)
-        //{
-        //    Initialize();
-        //}
+        public SkeletonAnimation(string skeletonDataFile, string atlasFile, float scale = 0)
+            : base(skeletonDataFile, atlasFile, scale)
+        {
+            Initialize();
+        }
 
         public static SkeletonAnimation CreateWithData(SkeletonData skeletonData)
         {
@@ -66,11 +66,11 @@ namespace Spine
             return node;
         }
 
-        //public static SkeletonAnimation CreateWithFile(string skeletonDataFile, string atlasFile, float scale = 0)
-        //{
-        //    SkeletonAnimation node = new SkeletonAnimation(skeletonDataFile, atlasFile, scale);
-        //    return node;
-        //}
+        public new static SkeletonAnimation CreateWithFile(string skeletonDataFile, string atlasFile, float scale = 0)
+        {
+            SkeletonAnimation node = new SkeletonAnimation(skeletonDataFile, atlasFile, scale);
+            return node;
+        }
 
         public override void Update(float deltaTime)
         {
