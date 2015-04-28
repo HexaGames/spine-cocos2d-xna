@@ -64,7 +64,7 @@ namespace tests
             pDirector.DisplayStats = true;
             // set FPS. the default value is 1.0/60 if you don't call this
             pDirector.AnimationInterval = 1.0 / 60;
-            CCSize designSize = new CCSize(480, 320);
+            CCSize designSize = new CCSize(960, 640);
 
             if (CCDrawManager.FrameSize.Height > 320)
             {
@@ -112,18 +112,18 @@ namespace tests
 
 
             //String name = "spineboy";
-            String name = "goblins-mesh";
+            //String name = "goblins-mesh";
             bool binaryData = false;
 
-            //String name = "raptor";
+            String name = "raptor";
             //bool binaryData = true;
 
             float scale = 1;
             if (name == "spineboy") scale = 0.6f;
             if (name == "raptor") scale = 0.5f;
 
-            var skeletonAnimation = new SkeletonAnimation( name + ".json", name + ".atlas", scale);
-            skeletonAnimation.premultipliedAlpha = true;
+            var skeletonAnimation = new SkeletonAnimation(name + ".json", name + ".atlas", scale);
+            //skeletonAnimation.premultipliedAlpha = true;
 
             //SkeletonData skeletonData;
             //if (binaryData)
@@ -139,15 +139,16 @@ namespace tests
             //    skeletonData = json.ReadSkeletonData(assetsFolder + name + ".json");
             //}
             //skeleton = new Skeleton(skeletonData);
-            //if (name == "goblins-mesh") skeleton.SetSkin("goblin");
+            if (name == "goblins-mesh")
+                skeletonAnimation.SetSkin("goblin");
 
             //// Define mixing between animations.
             //AnimationStateData stateData = new AnimationStateData(skeleton.Data);
             //state = new AnimationState(stateData);
 
-            skeletonAnimation.NodeToWorldTransform();
-            skeletonAnimation.SetSlotsToSetupPose();
-            skeletonAnimation.UpdateWorldTransform();
+            //skeletonAnimation.NodeToWorldTransform();
+            //skeletonAnimation.SetSlotsToSetupPose();
+            //skeletonAnimation.UpdateWorldTransform();
 
             if (name == "spineboy")
             {
@@ -176,8 +177,9 @@ namespace tests
                 skeletonAnimation.SetAnimation(0, "walk", true);
             }
 
-            skeletonAnimation.PositionX = 400;
-            skeletonAnimation.PositionY = 590;
+            //skeletonAnimation.AnchorPoint = CCPoint.AnchorLowerLeft;
+            skeletonAnimation.PositionX = 300;
+            skeletonAnimation.PositionY = 200;
             //skeleton.UpdateWorldTransform();
 
             var headSlot = skeletonAnimation.FindSlot("head");
@@ -185,7 +187,6 @@ namespace tests
 
             //CCLayer pLayer = new TestController();
             //pScene.AddChild(pLayer);
-
 
             pDirector.RunWithScene(pScene);
             return true;
