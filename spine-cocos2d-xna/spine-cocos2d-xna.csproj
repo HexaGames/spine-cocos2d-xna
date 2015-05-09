@@ -84,10 +84,6 @@
       <Project>{690e4aa7-bb09-4663-9908-fd5637ae907a}</Project>
       <Name>spine-csharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\spine-monogame\spine-monogame.csproj">
-      <Project>{9145cff2-16f7-4ca3-b298-b0fb357495d6}</Project>
-      <Name>spine-monogame</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
